@@ -4,6 +4,7 @@ require "./lconfig/configlogin.php";
 require "checker.php";
 checklogin();
 ?>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" /> 
 <h1>欢迎，<?php echo getuser();?></h1>
 <p>在sessionstart的前提下使用getuser函数获取目前用户名</p>
 <p>&nbsp;</p>
