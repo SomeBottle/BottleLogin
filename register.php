@@ -1,6 +1,10 @@
 ﻿<?php
 require "./lconfig/configlogin.php";
 $message=$_POST['mes'];
+if($allowreg!=="yes"){
+	echo "<script>alert('很抱歉，注册被关闭！');window.open('login.php','_self');</script>";
+	exit();
+}
 ?>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" /> 

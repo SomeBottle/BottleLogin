@@ -29,7 +29,7 @@ session_write_close();
 <p><strong>Password:</strong><input type="password" class="form-control" id="pass" name="pass" placeholder="请输入密码"></input></p>
 </div>
 <div id="buttons">
-<p><button type="submit" class="btn btn-default">提交</button>&nbsp;<button type="button" class="btn btn-info" onclick="goreg()">注册</button></p>
+<p><button type="submit" class="btn btn-default">提交</button><?php if($allowreg=="yes"){ ?>&nbsp;<button type="button" class="btn btn-info" onclick="goreg()">注册</button><?php } ?></p>
 </div>
 </form>
 </center>

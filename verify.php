@@ -16,6 +16,7 @@ $action = $_GET['do'];
 $refers = $_POST['dotype'];
 $message = '';
 if ($action == "register") { //注册
+if($allowreg=="yes"){
     require 'getip.php';
     $ifok = $_COOKIE["rego"];
     $user = $_POST['user'];
@@ -163,6 +164,10 @@ if ($action == "register") { //注册
             }
         }
     }
+}else{
+	echo "<script>alert('很抱歉，注册被关闭！');window.open('login.php','_self');</script>";
+	exit();
+}
 } else if ($action == "login") {
     //登录开始
     $user = $_POST['user'];
