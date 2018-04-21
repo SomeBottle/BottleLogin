@@ -172,6 +172,9 @@ if($allowreg=="yes"){
     //登录开始
     $user = $_POST['user'];
     $pass = $_POST['pass'];
+	if(strlen($pass)>16){
+		$message = "<center>兄dei，这里没有超出16位的密码（诚实脸）</center>";
+	}else{
     if (!is_dir("./user/$user")) {
         $message = "<center>箱子里还找不出这个用户名TAT</center>";
     } else {
@@ -278,12 +281,16 @@ if($allowreg=="yes"){
             $message = "<center>$errorpassmessage ErrorCode:$result</center>";
         }
     }
+	}
 } else if ($action == "changepass") {//更改密码核心
     require 'getip.php';
     $user = $_POST['user'];
     $passrecent = $_POST['pass'];
     $confirmrecent = $_POST['repass'];
     $pass = $_POST['pass'];
+	if(strlen($pass)>16){
+		$message = "<center>兄dei，这里没有超出16位的密码（诚实脸）</center>";
+	}else{
     if (!is_dir("./user/$user")) { //测试密码是否正确
         $message = "<center>箱子里还找不出这个用户名TAT</center>";
     } else {
@@ -438,6 +445,7 @@ if($allowreg=="yes"){
             $message = "<center>$errorpassmessage ErrorCode:$result</center>";
         }
     }
+	}
 }
 ?>
 <form action="<?php echo $refers; ?>" method="post" id="mesform">
