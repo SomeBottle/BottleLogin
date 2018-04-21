@@ -179,6 +179,16 @@ if($allowreg=="yes"){
         require "./user/$user/pw/p2.php";
         require "./user/$user/pw/p3.php";
         require "./user/$user/pw/p4.php";
+		//计数有效密码个数
+		$checkvalidpass=0;
+		$validpass=0;
+		$countpass=1;
+		while($countpass<=4){
+		    if(${"passwd$countpass"}!=='d41d8cd98f00b204e9800998ecf8427e'){
+				$validpass+=1;
+			}
+			$countpass+=1;
+		}
         //切割密码
         $ly1 = substr($pass, 0, 5);
         $ly2 = substr($pass, 5, 5);
@@ -202,6 +212,9 @@ if($allowreg=="yes"){
                 break;
             }
         }
+		if(${"passwd$sx1"}!=='d41d8cd98f00b204e9800998ecf8427e'){
+				$checkvalidpass+=1;
+			}
         while ($ {
             "passwd$sx2"
         } !== md5($ly2)) {
@@ -212,6 +225,9 @@ if($allowreg=="yes"){
                 break;
             }
         }
+		if(${"passwd$sx2"}!=='d41d8cd98f00b204e9800998ecf8427e'){
+				$checkvalidpass+=1;
+			}
         while ($ {
             "passwd$sx3"
         } !== md5($ly3)) {
@@ -222,6 +238,9 @@ if($allowreg=="yes"){
                 break;
             }
         }
+		if(${"passwd$sx3"}!=='d41d8cd98f00b204e9800998ecf8427e'){
+				$checkvalidpass+=1;
+			}
         while ($ {
             "passwd$sx4"
         } !== md5($ly4)) {
@@ -232,6 +251,9 @@ if($allowreg=="yes"){
                 break;
             }
         }
+		if(${"passwd$sx4"}!=='d41d8cd98f00b204e9800998ecf8427e'){
+				$checkvalidpass+=1;
+			}
         if ($ {
             "passwd$sx1"
         } == md5($ly1) && $ {
@@ -241,9 +263,17 @@ if($allowreg=="yes"){
         } == md5($ly3) && $ {
             "passwd$sx4"
         } == md5($ly4)) {
+			if(${"passwd$sx1"}.${"passwd$sx2"}.${"passwd$sx3"}.${"passwd$sx4"}==md5($ly1).md5($ly2).md5($ly3).md5($ly4)){
+				if($checkvalidpass==$validpass){
             $message = "<center>$loginsuccessmessage Code:$result</center>";
-			$_SESSION['iflogin']="yes";
-			$_SESSION['username']=$user;
+			$_SESSION[$sessionname.'iflogin']="yes";
+			$_SESSION[$sessionname.'username']=$user;
+				}else{
+					$message = "<center>$errorpassmessage ErrorCode:LostValidPass</center>";
+				}
+			}else {
+            $message = "<center>$errorpassmessage ErrorCode:$result</center>";
+        }
         } else {
             $message = "<center>$errorpassmessage ErrorCode:$result</center>";
         }
@@ -261,6 +291,16 @@ if($allowreg=="yes"){
         require "./user/$user/pw/p2.php";
         require "./user/$user/pw/p3.php";
         require "./user/$user/pw/p4.php";
+		//计数有效密码个数
+		$checkvalidpass=0;
+		$validpass=0;
+		$countpass=1;
+		while($countpass<=4){
+		    if(${"passwd$countpass"}!=='d41d8cd98f00b204e9800998ecf8427e'){
+				$validpass+=1;
+			}
+			$countpass+=1;
+		}
         //切割密码
         $ly1 = substr($pass, 0, 5);
         $ly2 = substr($pass, 5, 5);
@@ -284,6 +324,9 @@ if($allowreg=="yes"){
                 break;
             }
         }
+		if(${"passwd$sx1"}!=='d41d8cd98f00b204e9800998ecf8427e'){
+				$checkvalidpass+=1;
+			}
         while ($ {
             "passwd$sx2"
         } !== md5($ly2)) {
@@ -294,6 +337,9 @@ if($allowreg=="yes"){
                 break;
             }
         }
+		if(${"passwd$sx2"}!=='d41d8cd98f00b204e9800998ecf8427e'){
+				$checkvalidpass+=1;
+			}
         while ($ {
             "passwd$sx3"
         } !== md5($ly3)) {
@@ -304,6 +350,9 @@ if($allowreg=="yes"){
                 break;
             }
         }
+		if(${"passwd$sx3"}!=='d41d8cd98f00b204e9800998ecf8427e'){
+				$checkvalidpass+=1;
+			}
         while ($ {
             "passwd$sx4"
         } !== md5($ly4)) {
@@ -314,6 +363,9 @@ if($allowreg=="yes"){
                 break;
             }
         }
+		if(${"passwd$sx4"}!=='d41d8cd98f00b204e9800998ecf8427e'){
+				$checkvalidpass+=1;
+			}
         if ($ {
             "passwd$sx1"
         } == md5($ly1) && $ {
@@ -323,6 +375,7 @@ if($allowreg=="yes"){
         } == md5($ly3) && $ {
             "passwd$sx4"
         } == md5($ly4)) {
+			if($checkvalidpass==$validpass){
             //更改密码模块
             if (!empty($_POST['user']) && !empty($_POST['newpass'])) {
                 echo "<script type='text/javascript'>console.log($ifok);</script>";
@@ -378,7 +431,9 @@ if($allowreg=="yes"){
                 $message = "Error:Null";
             }
             //注册核心结束
-            
+            }else{
+				$message = "<center>$errorpassmessage ErrorCode:LostValidPass</center>";
+			}
         } else {
             $message = "<center>$errorpassmessage ErrorCode:$result</center>";
         }
