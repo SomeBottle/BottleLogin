@@ -1,7 +1,6 @@
 ﻿<?php
 session_start();
-require "./lconfig/configlogin.php";
-require "checker.php";
+require "./../checker.php";
 checklogin();
 ?>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" /> 
@@ -23,6 +22,6 @@ checklogin();
 <p>很期待这个按钮，不是嘛？o(￣ヘ￣o＃)</p>
 <script>
 function logout(){
-	window.open('logout.php','_self');
+	window.open('./../logout.php','_self');
 }
 </script>

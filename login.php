@@ -6,12 +6,18 @@ session_write_close();
 ?>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" /> 
+<?php 
+if($oldmode!=='yes'){
+	?>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.css" rel="stylesheet">
 <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
 <link href="css/login.css" rel="stylesheet">
 <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<?php 
+}
+?>
 <title><?php echo $windowtitle;?></title>
 </head>
 <body>
@@ -36,11 +42,15 @@ session_write_close();
 </body>
 <?php
 if(strpos($message,"Founded")!==false){
+	if($oldmode=='yes'){
+	header("location:$loginrefer");
+	}else{
 	?>
 	<script>
 	setTimeout("window.open('<?php echo $loginrefer;?>','_self');",2500);
 	</script>
 	<?php
+	}
 }
 ?>
 <script>
