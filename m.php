@@ -3,6 +3,26 @@ $d=$_GET['t'];
 if(empty($d)){
 	$d='login';
 }
+function is_https() {
+    if ( !empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off') {
+        return true;
+    } elseif ( isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' ) {
+        return true;
+    } elseif ( !empty($_SERVER['HTTP_FRONT_END_HTTPS']) && strtolower($_SERVER['HTTP_FRONT_END_HTTPS']) !== 'off') {
+        return true;
+    }
+    return false;
+}
+if(!file_exists(dirname(__FILE__) .'/d.txt')){
+	$d='';
+	if(is_https()){
+	    $d='https://'.$_SERVER['SERVER_NAME'].str_replace('m.php','',$_SERVER["REQUEST_URI"]);
+	}else{
+		$d='http://'.$_SERVER['SERVER_NAME'].str_replace('m.php','',$_SERVER["REQUEST_URI"]);
+	}
+	echo "<p>初始化完毕 >√</p><p>请刷新页面</p>";
+	file_put_contents(dirname(__FILE__) .'/d.txt',$d);
+}
 if($d=='login'){//登录
 	session_start();
 require "./lconfig/configlogin.php";

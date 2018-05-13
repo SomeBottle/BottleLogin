@@ -5,8 +5,13 @@ $user=@$_SESSION[$sessionname.'username'];
 function checklogin(){
 	global $sessionname;
 if(!isset($_SESSION[$sessionname.'iflogin'])||!isset($_SESSION[$sessionname.'username'])||$_SESSION[$sessionname.'iflogin']!=="yes"){
-	header('Location:'.dirname(__FILE__).'/login.php');
-	echo "<script>alert('没有登录...');window.open('login.php','_self');</script>";
+	$a=file_get_contents(dirname(__FILE__) .'/d.txt');
+	if(!file_exists(dirname(__FILE__) .'/d.txt')){
+		echo "<script>alert('BottleLogin没有初始化！');</script>";
+		exit();
+	}
+	header('Location: '.$a.'m.php?t=login');
+	echo "<script>alert('没有登录...');</script>";
 	exit();
 }else{
 	return 'yes';
