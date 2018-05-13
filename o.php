@@ -5,16 +5,8 @@ $user=@$_SESSION[$sessionname.'username'];
 function checklogin(){
 	global $sessionname;
 if(!isset($_SESSION[$sessionname.'iflogin'])||!isset($_SESSION[$sessionname.'username'])||$_SESSION[$sessionname.'iflogin']!=="yes"){
+	header('Location:'.dirname(__FILE__).'/login.php');
 	echo "<script>alert('没有登录...');window.open('login.php','_self');</script>";
-	exit();
-}else{
-	return 'yes';
-}
-}
-function checkloginadmin(){
-	global $sessionname;
-if(!isset($_SESSION[$sessionname.'iflogin'])||!isset($_SESSION[$sessionname.'username'])||$_SESSION[$sessionname.'iflogin']!=="yes"){
-	echo "<script>alert('没有登录...');window.open('./bottlelogin/login.php','_self');</script>";
 	exit();
 }else{
 	return 'yes';
@@ -22,9 +14,11 @@ if(!isset($_SESSION[$sessionname.'iflogin'])||!isset($_SESSION[$sessionname.'use
 }
 function checkrefer(){
 	global $sessionname;
+	global $loginrefer;
 	if($_SESSION[$sessionname.'iflogin']=="yes"){
 		echo "<script>alert('已经登录！');window.open('$loginrefer','_self');</script>";
-	}
+		exit();
+	}	
 }
 function getuser(){
 	global $sessionname;
