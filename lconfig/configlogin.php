@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $windowtitle="SomeBottle's Login Portal";//窗口标题
 $maintitle="Bottle's Login Portal";//主标题
 $registertitle="Please Register";//注册标题
