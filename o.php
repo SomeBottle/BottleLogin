@@ -37,6 +37,38 @@ function getid($user){
 	require dirname(__FILE__)."/user/$user/profile.php";
 	return $uid;
 }
+function setprofile($user,$item,$content){
+	global $sessionname;
+	if(empty($user)){
+		$user=$_SESSION[$sessionname.'username'];
+	}
+	require dirname(__FILE__)."/user/$user/profile.php";
+    $m[$item]=$content;
+	$string='<?php $name="'.$name.'";$uid="'.$uid.'";$m='.var_export($m,true).';?>';
+	file_put_contents(dirname(__FILE__)."/user/$user/profile.php",$string);
+}
+function getprofile($user,$item){
+	global $sessionname;
+	if(empty($user)){
+		$user=$_SESSION[$sessionname.'username'];
+	}
+	require dirname(__FILE__)."/user/$user/profile.php";
+	if(isset($m[$item])){
+	return $m[$item];
+	}else{
+		return false;
+	}
+}
+function removeprofile($user,$item){
+	global $sessionname;
+	if(empty($user)){
+		$user=$_SESSION[$sessionname.'username'];
+	}
+	require dirname(__FILE__)."/user/$user/profile.php";
+	unset($m[$item]);
+	$string='<?php $name="'.$name.'";$uid="'.$uid.'";$m='.var_export($m,true).';?>';
+	file_put_contents(dirname(__FILE__)."/user/$user/profile.php",$string);
+}
 function getname($id){
 	global $sessionname;
 	require dirname(__FILE__)."/userid/$id.php";

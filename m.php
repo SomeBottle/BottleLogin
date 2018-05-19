@@ -20,7 +20,7 @@ if(!file_exists(dirname(__FILE__) .'/d.txt')){
 	}else{
 		$d='http://'.$_SERVER['SERVER_NAME'].str_replace('m.php','',$_SERVER["REQUEST_URI"]);
 	}
-	echo "<p>初始化完毕 >√</p><p>请刷新页面</p>";
+	echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' /><p>初始化完毕 >√</p><p>请刷新页面</p>";
 	file_put_contents(dirname(__FILE__) .'/d.txt',$d);
 }
 if($d=='login'){//登录
