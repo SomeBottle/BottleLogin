@@ -12,6 +12,16 @@
 检测登录API为o.php,  
 在**sessionstart**的前提下,引用o.php，可以用checklogin()检查是否登录，若没有登录将被强行送到m.php?t=login.  
 checkrefer()若检查已经登录，则跳转到指定的页面.
+## 新增:
+**setprofile(用户，属性，内容); ** 来给用户设置某一项特殊的属性  
+**getprofile(用户，属性);** 可以获取设置的属性内容  
+**removeprofile(用户，属性); **可以移除用户的某一项属性  
+### [例如]
+```
+setprofile('Sobo','exp',4);
+getprofile('Sobo','exp'); //return : 4  
+```
+另外，如果找不到用户，会返回false  
 
 ----------------------------------
 ## 极速登录模式
