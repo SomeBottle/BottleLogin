@@ -1,4 +1,3 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php
 require dirname(__FILE__)."/lconfig/configlogin.php";
 $serverhostpath='http://'.$_SERVER['SERVER_NAME'].$_SERVER["REQUEST_URI"];
