@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once './o.php';
 require "./lconfig/configlogin.php";
 function searchword($file,$word){
 $mystring = file_get_contents("$file"); 
@@ -29,6 +30,7 @@ function getip()
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <form action="v.php?zc=yes&confirm=yes&do=register" method="post" id="veriform">
+<input type="hidden" id="email" name="email"></input>
 <input type="hidden" id="typenum" name="tpnum"></input>
 <input type="hidden" id="vnum" name="vnum"></input>
 <input type="hidden" id="usert" name="user"></input>
@@ -79,6 +81,7 @@ if($allowreg=="yes"){
             echo "<script>document.getElementById('typenum').value=verifynum;</script>";
             $lastrand = rand(1, 9999);
             $_SESSION['vnum'] = md5($lastrand);
+			echo "<script>function gmail(){var mail=prompt('请输入注册邮箱~这对于获取头像是有用的','');if(mail==''||mail==null||mail==undefined||mail.indexOf('@')<=0){alert('请输入正确的邮箱！');return gmail();}else{document.getElementById('email').value=mail;}}gmail();</script>";
             echo "<script>function ti(){var typet=prompt('请输入$lastrand ','');if(typet!==null&&typet!==''){document.getElementById('vnum').value=typet;}else{return ti();}};ti();</script>";
             echo "<script>document.getElementById('usert').value='$user';</script>";
             echo "<script>document.getElementById('passt').value='$passrecent';</script>";
@@ -110,6 +113,7 @@ if($allowreg=="yes"){
                                 $userlength = strlen($_POST['user']);
                                 $length = strlen($_POST['pass']);
                                 $passw = $_POST['pass'];
+								if(!empty($_POST['email'])||strpos($_POST['email'],'@')!==false){
                                 if ($userlength >= 4 && $userlength <= 12) {
                                     if ($length >= 6 && $length <= 16) {
                                         //切割密码
@@ -160,6 +164,8 @@ if($allowreg=="yes"){
                                                 "passwd$sx4"
                                             });
                                             $message = "<h4>$regsuccessmessage</h4>";
+											setprofile($user,'permission','normal');
+											setprofile($user,'email',$_POST['email']);
                                         } else {
                                             $message = "<center>$alreadyregistered</center>";
                                         }
@@ -182,6 +188,9 @@ if($allowreg=="yes"){
                                 } else {
                                     $message = "<center>用户名长度过短或过长！最短4个字符，最长12个字符！</center>";
                                 }
+								}else{
+									$message = "<center>别忘了填写邮箱！</center>";
+								}
                             }
                         } else {
                             $message = "Error:Null";
