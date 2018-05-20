@@ -25,6 +25,14 @@ function checkrefer(){
 		exit();
 	}	
 }
+function checklogged(){
+	global $sessionname;
+if(!isset($_SESSION[$sessionname.'iflogin'])||!isset($_SESSION[$sessionname.'username'])||$_SESSION[$sessionname.'iflogin']!=="yes"){
+	return false;
+}else{
+	return true;
+}
+}
 function getuser(){
 	global $sessionname;
 	return $_SESSION[$sessionname.'username'];
